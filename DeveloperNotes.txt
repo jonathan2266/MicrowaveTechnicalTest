@@ -2,3 +2,6 @@ This document serves as documentation and explains some of the design choices ma
 
 In the technical test it is stated that "Any additional requirements that may be missed can be assumed by you, but please note those down".
 I assumed that the Lights are automatically controlled by the "IMicrowaveOvenHW" interface/hardware. The lights can't be controlled in any other way then by the doors. And this is something that is directly wired into the hardware.
+
+"When I open door heater stops if running."
+Calling the interface to stop the heater has no negative effect when the heater was already off. This simplifies the code and the heater state is not known trough the hardware interface.

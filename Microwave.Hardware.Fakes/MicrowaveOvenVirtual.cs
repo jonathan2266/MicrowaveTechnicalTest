@@ -19,6 +19,9 @@ namespace Microwave.Hardware.Fakes
         public bool IsLightOn => DoorOpen;
         public bool DoorOpen { get; private set; }
 
+        /// <summary>
+        /// event fired when door state is changed. Returns boolean IsDoorOpen?
+        /// </summary>
         public event Action<bool> DoorOpenChanged;
         public event EventHandler StartButtonPressed;
 

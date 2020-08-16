@@ -12,6 +12,8 @@ namespace Microwave.Controller
         private readonly IMicrowaveOvenHW _microwaveOvenHW;
         private readonly ITimer _timer;
 
+        private readonly TimeSpan DefaultTimerDuration = new TimeSpan(0, 1, 0);
+
         public MirowaveController(IMicrowaveOvenHW microwaveOvenHW, ITimer timer)
         {
             _microwaveOvenHW = microwaveOvenHW ?? throw new ArgumentNullException("microwaveOvenHW");
@@ -30,17 +32,24 @@ namespace Microwave.Controller
 
         private void _timer_TimerReachedZero()
         {
-            throw new NotImplementedException();
+            _microwaveOvenHW.TurnOffHeater();
         }
 
         private void _microwaveOvenHW_StartButtonPressed(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (_microwaveOvenHW.DoorOpen) return;
+
+            _timer.AddTime(DefaultTimerDuration);
+
+            _microwaveOvenHW.TurnOnHeater();
         }
 
-        private void _microwaveOvenHW_DoorOpenChanged(bool obj)
+        private void _microwaveOvenHW_DoorOpenChanged(bool IsDoorOpen)
         {
-            throw new NotImplementedException();
+            if (IsDoorOpen)
+            {
+                _microwaveOvenHW.TurnOffHeater();
+            }
         }
     }
 }
