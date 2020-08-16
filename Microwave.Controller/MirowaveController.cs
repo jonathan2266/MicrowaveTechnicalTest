@@ -3,13 +3,16 @@ using System;
 
 namespace Microwave.Controller
 {
+    /// <summary>
+    /// Custom controller for the microwave oven. Interacts with the hardware and processes user interactions.
+    /// </summary>
     public class MirowaveController
     {
         private readonly IMicrowaveOvenHW _microwaveOvenHW;
 
         public MirowaveController(IMicrowaveOvenHW microwaveOvenHW)
         {
-            _microwaveOvenHW = microwaveOvenHW;
+            _microwaveOvenHW = microwaveOvenHW ?? throw new ArgumentNullException("microwaveOvenHW");
 
             Initialize();
         }

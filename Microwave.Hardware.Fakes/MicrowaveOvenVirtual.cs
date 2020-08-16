@@ -4,6 +4,9 @@ using System;
 
 namespace Microwave.Hardware.Fakes
 {
+    /// <summary>
+    /// Represents a virtual Microwave oven for testing and integration tests.
+    /// </summary>
     public class MicrowaveOvenVirtual : IMicrowaveOvenHW, IMicrowaveOvenUser
     {
         public MicrowaveOvenVirtual()
@@ -13,6 +16,7 @@ namespace Microwave.Hardware.Fakes
         }
 
         public bool IsHeating { get; private set; }
+        public bool IsLightOn => DoorOpen;
         public bool DoorOpen { get; private set; }
 
         public event Action<bool> DoorOpenChanged;
