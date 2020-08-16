@@ -1,4 +1,5 @@
-﻿using Microwave.Hardware.Interfaces;
+﻿using Microwave.Controller.Timers;
+using Microwave.Hardware.Interfaces;
 using System;
 
 namespace Microwave.Controller
@@ -9,10 +10,12 @@ namespace Microwave.Controller
     public class MirowaveController
     {
         private readonly IMicrowaveOvenHW _microwaveOvenHW;
+        private readonly ITimer _timer;
 
-        public MirowaveController(IMicrowaveOvenHW microwaveOvenHW)
+        public MirowaveController(IMicrowaveOvenHW microwaveOvenHW, ITimer timer)
         {
             _microwaveOvenHW = microwaveOvenHW ?? throw new ArgumentNullException("microwaveOvenHW");
+            _timer = timer ?? throw new ArgumentNullException("timer");
 
             Initialize();
         }
@@ -21,6 +24,13 @@ namespace Microwave.Controller
         {
             _microwaveOvenHW.DoorOpenChanged += _microwaveOvenHW_DoorOpenChanged;
             _microwaveOvenHW.StartButtonPressed += _microwaveOvenHW_StartButtonPressed;
+
+            _timer.TimerReachedZero += _timer_TimerReachedZero;
+        }
+
+        private void _timer_TimerReachedZero()
+        {
+            throw new NotImplementedException();
         }
 
         private void _microwaveOvenHW_StartButtonPressed(object sender, EventArgs e)
