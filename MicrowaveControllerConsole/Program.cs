@@ -39,14 +39,15 @@ namespace MicrowaveControllerConsole
             var hardware = new MicrowaveOvenVirtual(false);
             var timer = new MicrowaveTimer();
 
-            MirowaveController controller = new MirowaveController(hardware, timer);
-
-            if (hardware.DoorOpen)
+            using (var controller = new MirowaveController(hardware, timer))
             {
-                hardware.ToggleDoor();
-            }
+                if (hardware.DoorOpen)
+                {
+                    hardware.ToggleDoor();
+                }
 
-            hardware.PressStartButton();
+                hardware.PressStartButton();
+            }
 
             Console.ReadKey();
 

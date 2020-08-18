@@ -7,7 +7,7 @@ namespace Microwave.Controller
     /// <summary>
     /// Custom controller for the microwave oven. Interacts with the hardware and processes user interactions.
     /// </summary>
-    public class MirowaveController
+    public class MirowaveController : IDisposable
     {
         private readonly IMicrowaveOvenHW _microwaveOvenHW;
         private readonly ITimer _timer;
@@ -51,6 +51,13 @@ namespace Microwave.Controller
                 _timer.Reset();
                 _microwaveOvenHW.TurnOffHeater();
             }
+        }
+
+        public void Dispose()
+        {
+            _microwaveOvenHW.DoorOpenChanged -= _microwaveOvenHW_DoorOpenChanged;
+            _microwaveOvenHW.StartButtonPressed -= _microwaveOvenHW_StartButtonPressed;
+            _timer.TimerReachedZero -= _timer_TimerReachedZero;
         }
     }
 }
