@@ -48,6 +48,7 @@ namespace Microwave.Controller
         {
             if (IsDoorOpen)
             {
+                _timer.Reset();
                 _microwaveOvenHW.TurnOffHeater();
             }
         }

@@ -9,10 +9,10 @@ namespace Microwave.Hardware.Fakes
     /// </summary>
     public class MicrowaveOvenVirtual : IMicrowaveOvenHW, IMicrowaveOvenUser
     {
-        public MicrowaveOvenVirtual()
+        public MicrowaveOvenVirtual(bool IsDoorOpen)
         {
             IsHeating = false;
-            DoorOpen = false;
+            DoorOpen = IsDoorOpen;
         }
 
         public bool IsHeating { get; private set; }
@@ -34,7 +34,7 @@ namespace Microwave.Hardware.Fakes
         {
             DoorOpen = !DoorOpen;
 
-            DoorOpenChanged.Invoke(DoorOpen);
+            DoorOpenChanged?.Invoke(DoorOpen);
         }
 
         public void TurnOffHeater()

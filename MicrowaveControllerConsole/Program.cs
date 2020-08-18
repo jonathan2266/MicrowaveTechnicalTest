@@ -6,17 +6,17 @@ using System.Threading;
 
 namespace MicrowaveControllerConsole
 {
+    /// <summary>
+    /// class used for debugging.
+    /// </summary>
     class Program
     {
         private static DateTime startTime;
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             TestController();
             TestTimer();
-
 
             Console.ReadKey();
         }
@@ -36,7 +36,7 @@ namespace MicrowaveControllerConsole
 
         private static void TestController()
         {
-            var hardware = new MicrowaveOvenVirtual();
+            var hardware = new MicrowaveOvenVirtual(false);
             var timer = new MicrowaveTimer();
 
             MirowaveController controller = new MirowaveController(hardware, timer);
