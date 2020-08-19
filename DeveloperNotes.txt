@@ -1,5 +1,8 @@
 This document serves as documentation and explains some of the design choices made.
 
+The solution exists of several libraries that are written in .Net standard 2.0
+The tests and the console application are written in .Net Core 2.1
+
 In the technical test it is stated that "Any additional requirements that may be missed can be assumed by you, but please note those down".
 I assumed that the Lights are automatically controlled by the "IMicrowaveOvenHW" interface/hardware. The lights can't be controlled in any other way then by the doors. And this is something that is directly wired into the hardware.
 
