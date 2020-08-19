@@ -35,21 +35,23 @@ namespace Microwave.Controller.Tests
         }
 
         [TestMethod]
-        public void MicrowaveController_StartButtonpressedWithClosedDoor_StartsHeaterRunsTimer()
+        public void MicrowaveController_StartButtonpressedWithClosedDoor_StartsHeaterRunsTimerOneMinute()
         {
             hardwareMock.Setup(hardware => hardware.DoorOpen).Returns(false);
+            var oneMinuteTimespan = new TimeSpan(0, 1, 0);
 
             hardwareMock.Raise(exp => exp.StartButtonPressed += null, EventArgs.Empty);
 
             //verify results
-            timerMock.Verify(timer => timer.AddTime(It.IsAny<TimeSpan>()), Times.AtLeastOnce);
+            timerMock.Verify(timer => timer.AddTime(It.Is<TimeSpan>(span => span == oneMinuteTimespan)));
             hardwareMock.Verify(hardware => hardware.TurnOnHeater(), Times.AtLeastOnce);
         }
 
         [TestMethod]
-        public void MicrowaveController_StartButtonpressedMultipleTimesWithClosedDoor_StartsHeaterIncreasesTimer()
+        public void MicrowaveController_StartButtonpressedMultipleTimesWithClosedDoor_StartsHeaterIncreasesTimerWithOneMinute()
         {
             hardwareMock.Setup(hardware => hardware.DoorOpen).Returns(false);
+            var oneMinuteTimespan = new TimeSpan(0, 1, 0);
 
             int startButtonPressed = 3;
 
@@ -59,7 +61,7 @@ namespace Microwave.Controller.Tests
             }
 
             //verify results
-            timerMock.Verify(timer => timer.AddTime(It.IsAny<TimeSpan>()), Times.Exactly(startButtonPressed));
+            timerMock.Verify(timer => timer.AddTime(It.Is<TimeSpan>(span => span == oneMinuteTimespan)), Times.Exactly(startButtonPressed));
             hardwareMock.Verify(hardware => hardware.TurnOnHeater(), Times.AtLeastOnce);
         }
 

@@ -44,6 +44,35 @@ namespace Microwave.Controller.Tests
         }
 
         [TestMethod]
+        public void MicrowaveTimer_AddMultipleSeconds_FiresEventAfterTotalSum()
+        {
+            AutoResetEvent block = new AutoResetEvent(false);
+            TimeSpan oneSecond = new TimeSpan(0, 0, 1);
+            TimeSpan ExpectedCumulativeTime = new TimeSpan(0, 0, 2);
+
+            DateTime timerStart = DateTime.Now;
+            TimeSpan? timerdifference = null;
+
+            timer.TimerReachedZero += () =>
+            {
+                timerdifference = DateTime.Now - timerStart;
+                Assert.IsTrue(((int)(timerdifference.Value).TotalSeconds) == (int)ExpectedCumulativeTime.TotalSeconds);
+                block.Set();
+            };
+
+            timer.AddTime(oneSecond);
+            timer.AddTime(oneSecond);
+
+            //fail the test if it takes longer then expected to fire the event.
+            block.WaitOne((int)(oneSecond.Add(ExpectedCumulativeTime).TotalMilliseconds));
+
+            if (!timerdifference.HasValue)
+            {
+                Assert.Fail();
+            }
+        }
+
+        [TestMethod]
         public void MicrowaveTimer_SubstractTime_ArgumentOutOfRangeException()
         {
             AutoResetEvent block = new AutoResetEvent(false);
