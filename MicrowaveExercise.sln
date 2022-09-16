@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30406.217
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicrowaveControllerConsole", "MicrowaveControllerConsole\MicrowaveControllerConsole.csproj", "{36C87200-DF47-4ADB-847C-B99650077C7F}"
 EndProject
@@ -14,9 +14,10 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{FC636230-6E72-433E-8DAC-8E2B948A9423}"
 	ProjectSection(SolutionItems) = preProject
 		DeveloperNotes.txt = DeveloperNotes.txt
+		Technical_Test.pdf = Technical_Test.pdf
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microwave.Controller.Tests", "Microwave.Controller.Tests\Microwave.Controller.Tests.csproj", "{07CAECE8-373B-4BF3-B2C9-9C9EF4E53F2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Microwave.Controller.Tests", "Microwave.Controller.Tests\Microwave.Controller.Tests.csproj", "{07CAECE8-373B-4BF3-B2C9-9C9EF4E53F2E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{9DF21B94-E460-43DF-B979-44DC429E5360}"
 EndProject
